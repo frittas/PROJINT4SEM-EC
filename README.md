@@ -5,8 +5,7 @@ Projeto Integrador 4Sem Engenharia Comp - Unisal
 Desenvolvimento de uma plataforma de chat utilizando Python e a Library Chatterbot
 
 
-https://blog.logrocket.com/data-visualization-angular-d3-js/#setting-up-angular-d3
-
+https://chatterbot.readthedocs.io/en/stable/
 
 
 ## Checklist - Alterar
