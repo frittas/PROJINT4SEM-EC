@@ -1,9 +1,7 @@
 from chatterbot import ChatBot
-import chatterbot
 from chatterbot.trainers import ListTrainer
 from chatterbot.trainers import ChatterBotCorpusTrainer
 from difflib import SequenceMatcher
-
 
 ACCEPTANCE = 0.70
 
@@ -86,24 +84,30 @@ trainer = ChatterBotCorpusTrainer(chatbot)
 
 trainer.train('chatterbot.corpus.portuguese')
 
-
-trainer.export_for_training('./training_export.json')
-
-
-while True:
-    message = input("Eu: ")                # Campo de entrada
-    if any (x == 'stop' for x in message.split(" ")):
-        break
-    response = chatbot.get_response(message)   # Resposta do chatbot
-    print(f'\n{chatbot.name}: {response}\n')
+def getResponse(message):
+    response = chatbot.get_response(message)
+    return response
 
 
-while True:
-    chat_input = input("Digite alguma coisa...\n",)
-    response = chatbot.get_response(chat_input)
 
-    if response.confidence > 0.0:
-        print(f'\n{chatbot.name}: {response}\n')
-    else:
-        print("Ainda não sei como responder essa pergunta :(")
-        print("Pergunte outra coisa...")
+
+# trainer.export_for_training('./training_export.json')
+
+
+# while True:
+#     message = input("Eu: ")                # Campo de entrada
+#     if any (x == 'stop' for x in message.split(" ")):
+#         break
+#     response = chatbot.get_response(message)   # Resposta do chatbot
+#     print(f'\n{chatbot.name}: {response}\n')
+
+
+# while True:
+#     chat_input = input("Digite alguma coisa...\n",)
+#     response = chatbot.get_response(chat_input)
+
+#     if response.confidence > 0.0:
+#         print(f'\n{chatbot.name}: {response}\n')
+#     else:
+#         print("Ainda não sei como responder essa pergunta :(")
+#         print("Pergunte outra coisa...")
