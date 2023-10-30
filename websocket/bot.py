@@ -5,6 +5,7 @@ from difflib import SequenceMatcher
 
 ACCEPTANCE = 0.65
 
+
 def comparate_messages(message, candidate_message):
     similarity = 0.0
 
@@ -112,7 +113,6 @@ trainer = ChatterBotCorpusTrainer(jarbas)
 trainer.train(
     "chatterbot.corpus.portuguese.greetings"
 )
-
 
 while True:
     chat_input = input(
