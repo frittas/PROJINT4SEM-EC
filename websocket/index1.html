@@ -1,35 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Socket Thing1</title>
 </head>
+
 <body>
-    Client1
-    <button onclick="sendMsg()">Mande uma mensagem</button>
+    <textarea id="textarea"></textarea>
+    <button type="button" onclick="sendMsg()">Enviar</button>
 </body>
 <script>
-    // Create WebSocket connection.
-    const socket = new WebSocket('ws://localhost:5000');
+    const socket = new WebSocket('ws://localhost:8000');
 
-    // Connection opened
     socket.addEventListener('open', function (event) {
-        console.log('Connected to the WS Server!')
+        console.log('Connection Established');
     });
 
-    // Connection closed
-    socket.addEventListener('close', function (event) {
-        console.log('Disconnected from the WS Server!')
-    });
-
-    // Listen for messages
     socket.addEventListener('message', function (event) {
-        console.log('Message from server ', event.data);
+
+        console.log(event.data);
+
     });
-    // Send a msg to the websocket
+
     const sendMsg = () => {
-        socket.send('Deu certo PESSOA 1!');
+        const message = document.getElementById('textarea').value;
+        socket.send(message);
+        console.log('Mensagem enviada =======> ', message);
+
     }
 </script>
+
 </html>
