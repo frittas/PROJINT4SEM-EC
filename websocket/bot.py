@@ -39,7 +39,6 @@ def select_response(message, list_response, storage=None):
 
 jarbas = ChatBot(
     "Jarbas",
-    rea
     storage_adapter='chatterbot.storage.MongoDatabaseAdapter',
     statement_comparison_function=comparate_messages,
     response_selection_method=select_response,
@@ -122,7 +121,8 @@ while True:
     )
     response = jarbas.get_response(chat_input)
 
-    if response.confidence > ACCEPTANCE:
+
+    if response.confidence > 0.0:
         print(f"\n{jarbas.name}: {response}\n")
     else:
         print("Ainda não sei como responder essa pergunta :(")
