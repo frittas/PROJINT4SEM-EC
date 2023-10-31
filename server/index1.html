@@ -12,7 +12,7 @@
     <button type="button" onclick="sendMsg()">Enviar</button>
 </body>
 <script>
-    const socket = new WebSocket('ws://localhost:8000');
+    const socket = new WebSocket('ws://localhost:5000');
 
     socket.addEventListener('open', function (event) {
         console.log('Connection Established');

@@ -114,13 +114,16 @@ trainer.train(
     "chatterbot.corpus.portuguese.greetings"
 )
 
-while True:
-    chat_input = input(
-        "Digite alguma coisa...\n",
-    )
-    response = jarbas.get_response(chat_input)
-    if response.confidence > 0.0:
-        print(f"\n{jarbas.name}: {response}\n")
-    else:
-        print("Ainda não sei como responder essa pergunta :(")
-        print("Pergunte outra coisa...")
+def getResponse(message):
+    return jarbas.get_response(message)
+
+# while True:
+#     chat_input = input(
+#         "Digite alguma coisa...\n",
+#     )
+#     response = jarbas.get_response(chat_input)
+#     if response.confidence > 0.0:
+#         print(f"\n{jarbas.name}: {response}\n")
+#     else:
+#         print("Ainda não sei como responder essa pergunta :(")
+#         print("Pergunte outra coisa...")
