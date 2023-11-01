@@ -13,6 +13,7 @@ export class ChatBubble {
   @Prop() botImg: string;
   @Prop() personImg: string;
   @Prop() personName: string = 'Cliente';
+  @Prop() tolerancia: string = '0.65';
 
   @Element() el: HTMLElement;
 
@@ -21,7 +22,7 @@ export class ChatBubble {
   socket: WebSocket;
 
   componentDidLoad() {
-    this.socket = new WebSocket('ws://localhost:5000');
+    this.socket = new WebSocket(`ws://localhost:5000?params={"corpus":"${this.corpus}", "tolerance":"${this.tolerancia}"}`);
 
     this.socket.addEventListener('open', event => {
       console.log('Connection Established', event);

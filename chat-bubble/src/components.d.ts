@@ -14,6 +14,7 @@ export namespace Components {
         "corpus": string;
         "personImg": string;
         "personName": string;
+        "tolerancia": string;
     }
 }
 declare global {
@@ -36,6 +37,7 @@ declare namespace LocalJSX {
         "corpus"?: string;
         "personImg"?: string;
         "personName"?: string;
+        "tolerancia"?: string;
     }
     interface IntrinsicElements {
         "chat-bubble": ChatBubble;
