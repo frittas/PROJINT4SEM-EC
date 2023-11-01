@@ -5,18 +5,17 @@ import json
 import urllib.parse
 
 
-async def server(websocket: WebSocketServerProtocol, path: str):
+async def server(websocket, path: str):
 
     print('Cliente Conectado', path)
     unquoted = urllib.parse.unquote(path.split('=')[1])
     params = json.loads(unquoted)
     corpus = params["corpus"]
     tolerance = float(params["tolerance"])
-    socketBot = Bot('Jarbas', False, corpus, 'mongodb://localhost:27017', tolerance)
-
+    websocket.bot = Bot('Jarbas', True, corpus, 'mongodb://localhost:27017', tolerance)
     async for message in websocket:
         print((f'Mensagem do Client: {message}'))
-        response = socketBot.getResponse(message)
+        response = websocket.bot.getResponse(message)
 
         await websocket.send(f'{response}')
 
