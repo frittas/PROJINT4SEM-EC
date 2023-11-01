@@ -93,7 +93,7 @@ export class ChatBubble {
 
           <main class="msger-chat" style={{ backgroundImage: 'url(' + this.backgroundUrl + ')' }}>
             <div class="msg left-msg">
-              <div class="msg-img"></div>
+              <div class="msg-img" style={{ backgroundImage: 'url(' + this.botImg + ')' }}></div>
 
               <div class="msg-bubble">
                 <div class="msg-info">
