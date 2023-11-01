@@ -1,12 +1,19 @@
 from bot import *
 import asyncio
-from websockets.server import serve
+from websockets.server import serve, WebSocketServerProtocol
+import json
+import urllib.parse
 
 
-socketBot = Bot('Jarbas', True, 'vet', 'mongodb://localhost:27017', 0.65)
+async def server(websocket: WebSocketServerProtocol, path: str):
 
+    print('Cliente Conectado', path)
+    unquoted = urllib.parse.unquote(path.split('=')[1])
+    params = json.loads(unquoted)
+    corpus = params["corpus"]
+    tolerance = float(params["tolerance"])
+    socketBot = Bot('Jarbas', False, corpus, 'mongodb://localhost:27017', tolerance)
 
-async def server(websocket):
     async for message in websocket:
         print((f'Mensagem do Client: {message}'))
         response = socketBot.getResponse(message)
