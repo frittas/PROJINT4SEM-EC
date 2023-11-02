@@ -22,7 +22,7 @@ export class ChatBubble {
   socket: WebSocket;
 
   componentDidLoad() {
-    this.socket = new WebSocket(`ws://localhost:5000?params={"corpus":"${this.corpus}", "tolerance":"${this.tolerancia}"}`);
+    this.socket = new WebSocket(`ws://localhost:5000?params={"corpus":"${this.corpus}", "tolerance":"${this.tolerancia}", "botName":"${this.botName}"}`);
 
     this.socket.addEventListener('open', event => {
       console.log('Connection Established', event);

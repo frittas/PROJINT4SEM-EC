@@ -1,5 +1,7 @@
 from chatterbot import ChatBot
 from chatterbot.trainers import ChatterBotCorpusTrainer
+from chatterbot.comparisons import levenshtein_distance
+from chatterbot.response_selection import get_first_response
 from difflib import SequenceMatcher
 
 
@@ -25,11 +27,13 @@ class Bot:
             name,
             read_only=readOnly,
             storage_adapter='chatterbot.storage.MongoDatabaseAdapter',
+            response_selection_method=self.select_response,
             statement_comparison_function=self.comparate_messages,
-            logic_adapters=[
-                {
-                    "import_path": "chatterbot.logic.BestMatch",
-                }
+            logic_adapters=[{
+                "import_path": "chatterbot.logic.BestMatch",
+            }],
+            preprocessors=[
+                'chatterbot.preprocessors.clean_whitespace'
             ],
             database_uri=f'{self.database_uri}/{database}'
         )
@@ -40,6 +44,11 @@ class Bot:
             "chatterbot.corpus.portuguese.greetings",
             f"data/{corpusName}.yml"
         )
+
+    def select_response(self, message, list_response, storage=None):
+        response = list_response[0]
+        print("resposta escolhida:", response)
+        return response
 
     def getResponse(self, message):
         response = self.bot.get_response(message)
@@ -57,9 +66,8 @@ class Bot:
 
             similarity = SequenceMatcher(None, message_text, candidate_text)
             similarity = round(similarity.ratio(), 2)
-            if similarity < Bot.ACCEPTANCE:
+            if similarity < self.ACCEPTANCE:
                 similarity = 0
-                print(f"Similaridade menor que ", Bot.ACCEPTANCE)
             else:
                 print(
                     "Mensagem do usuário:",
