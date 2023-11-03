@@ -2,7 +2,7 @@
 
 Projeto Integrador 4Sem Engenharia Comp - Unisal  
 
-Desenvolvimento de uma plataforma de chat utilizando Python e a Library Chatterbot
+Desenvolvimento de uma plataforma de chat utilizando Python, WebComponent, WebSocket e a Library Chatterbot.
 
 
 https://chatterbot.readthedocs.io/en/stable/
@@ -10,16 +10,15 @@ https://chatterbot.readthedocs.io/en/stable/
 
 ## Checklist - Alterar
 
-- [x] Criar o Projeto Angular
-- [x] Adicionar dependências do D3
-- [x] Criar Componente de gráfico PIE
-- [x] Criar estrutura de side-menu
-- [x] Criar estrutura de Rotas para exibir o Dashboard
-- [x] Criar Componente de gráfico BAR
-- [x] Criar Componente de gráfico LINE
-- [x] Adicionar método de leitura de arquivo CSV externo ao projeto
-- [x] Adicionar criação dinâmica de itens no dash
-- [ ] Fazer o deploy do projeto no Google Firebase
+- [x] Instalar as bibliotecas necessárias: Chatterbot, WebComponent e WebSocket.
+- [x] Parametrização do ChatterBot.
+- [x] Criação do Bot.
+- [x] Integração com DataBase.
+- [x] Exposição do Bot Via WebSocket.
+- [x] Criação do WEBCOMPONENT.
+- [x] Consumo das API’s expostas.
+- [x] Testes Integrados.
+
 
 
 ## Get started - Alterar
@@ -27,17 +26,17 @@ https://chatterbot.readthedocs.io/en/stable/
 
 ### Pré Requisitos - Alterar
 
-1. Instalar [Node.js](https://nodejs.org)
-2. Instalar CLI Angular executando o comando no terminal:
+1. Instalar [ChatterBot](https://chatterbot.readthedocs.io/en/stable/setup.html)
+2. Instalar ChatterBot executando o comando no terminal:
   ```bash
-  npm i -g @angular/cli
+  pip install chatterbot
   ```
 
 ### Clonar o Repositório
 
 ```shell
-git clone https://github.com/frittas/PROJINT3SEM-EC
-cd PROJINT3SEM-EC
+git clone https://github.com/frittas/PROJINT4SEM-EC
+cd PROJINT4SEM-EC
 ```
 
 ### Instalar as dependências NPM
