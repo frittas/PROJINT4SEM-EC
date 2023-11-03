@@ -13,7 +13,7 @@ async def onConnect(websocket, path: str):
     corpus = params["corpus"]
     botName = params["botName"]
     tolerance = float(params["tolerance"])
-    websocket.bot = Bot(botName, False, corpus, 'mongodb://localhost:27017', tolerance)
+    websocket.bot = Bot(botName, True, corpus, 'mongodb://localhost:27017', tolerance)
     print((f'=========== Bot Inicializado: {botName} ================'))
     async for message in websocket:
         response = websocket.bot.getResponse(message)

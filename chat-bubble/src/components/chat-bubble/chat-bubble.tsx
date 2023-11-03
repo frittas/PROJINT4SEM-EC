@@ -44,6 +44,12 @@ export class ChatBubble {
     this.socket.send(msgText);
   }
 
+  handleKeyDown(e) {
+    if (e.code === 'Enter') {
+      this.sendMessage();
+    }
+  }
+
   get(selector: string) {
     return this.el.shadowRoot.querySelector(selector) as HTMLElement;
   }
@@ -108,7 +114,7 @@ export class ChatBubble {
           </main>
 
           <div class="msger-inputarea">
-            <input type="text" class="msger-input" placeholder="Digite sua mensagem..." />
+            <input type="text" onKeyDown={this.handleKeyDown.bind(this)} class="msger-input" placeholder="Digite sua mensagem..." />
             <button class="msger-send-btn" onClick={this.sendMessage.bind(this)}>
               Enviar
             </button>

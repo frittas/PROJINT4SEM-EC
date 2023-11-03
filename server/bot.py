@@ -1,6 +1,7 @@
+import chatterbot
 from chatterbot import ChatBot
-from chatterbot.trainers import ChatterBotCorpusTrainer
 from chatterbot.comparisons import levenshtein_distance
+from chatterbot.trainers import ChatterBotCorpusTrainer
 from chatterbot.response_selection import get_first_response
 from difflib import SequenceMatcher
 
@@ -27,11 +28,18 @@ class Bot:
             name,
             read_only=readOnly,
             storage_adapter='chatterbot.storage.MongoDatabaseAdapter',
-            response_selection_method=self.select_response,
-            statement_comparison_function=self.comparate_messages,
-            logic_adapters=[{
-                "import_path": "chatterbot.logic.BestMatch",
-            }],
+            logic_adapters=[
+                # {
+                #     "import_path": "customLogicAdapter.HighestConfidenceAdapter",
+                #     'threshold': self.ACCEPTANCE,
+
+                # },
+                {
+                    "import_path": "chatterbot.logic.BestMatch",
+                    "statement_comparison_function": levenshtein_distance,
+                    "response_selection_method": chatterbot.response_selection.get_first_response,
+                }
+            ],
             preprocessors=[
                 'chatterbot.preprocessors.clean_whitespace'
             ],
@@ -52,7 +60,7 @@ class Bot:
 
     def getResponse(self, message):
         response = self.bot.get_response(message)
-        if response.confidence > 0.0:
+        if response.confidence > 0:
             return response
         else:
             return "Ainda não sei como responder essa pergunta :("

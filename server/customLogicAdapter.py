@@ -13,22 +13,15 @@ class HighestConfidenceAdapter(LogicAdapter):
     def _init_(self, chatbot, **kwargs):
         super()._init_(chatbot, **kwargs)
 
-    # def process(self, statement, additional_response_selection_parameters):
-    #     # Obtenha uma lista de respostas candidatas
-    #     response_list = self.get_greatest_confidence_response(statement)
-
-    #     if response_list:
-    #         # Seleciona a resposta com a maior confiança
-    #         response = response_list[0]
-
-    #         return response
-
-    #     return None
-
     def process(self, statement, additional_response_selection_parameters):
         response = self.get_highest_confidence_response(statement)
-
+        print(f'Pergunta recebida - {statement.text}')
+        print(
+            f'Resposta Selecionada - {response.text} | Confidence: {response.confidence}')
         return response
+
+    def can_process(self, statement):
+        return True
 
     def get_highest_confidence_response(self, statement):
         response = None
@@ -46,7 +39,10 @@ class HighestConfidenceAdapter(LogicAdapter):
 
     def get_all_response_options(self, statement):
         response_list = []
-        for response in self.chatbot.storage.filter():
+        # Lista apenas as perguntas com respostas da base do Mongo
+        trained_list = list(filter(lambda list_item: list_item != None,
+                                   self.chatbot.storage.filter()))
+        for response in trained_list:
             # Calcula a confiança entre a entrada do usuário e cada resposta
             confidence = levenshtein_distance(statement, response)
 
