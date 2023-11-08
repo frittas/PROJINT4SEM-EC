@@ -16,7 +16,6 @@ https://chatterbot.readthedocs.io/en/stable/
 - [x] Integração com DataBase.
 - [x] Exposição do Bot Via WebSocket.
 - [x] Criação do WEBCOMPONENT.
-- [x] Consumo das API’s expostas.
 - [x] Testes Integrados.
 
 
