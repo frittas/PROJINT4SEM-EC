@@ -26,7 +26,7 @@ export class ChatBubble {
     this.socket = new WebSocket(`ws://localhost:5000?params={"corpus":"${this.corpus}", "tolerance":"${this.tolerancia}", "botName":"${this.botName}", "train":"${this.train}"}`);
 
     this.socket.addEventListener('open', event => {
-      console.log('Connection Established', event);
+      console.log(`Conexão Estabelecida - Nome: ${this.botName}`, event);
     });
 
     this.socket.addEventListener('message', event => {
@@ -105,8 +105,8 @@ export class ChatBubble {
               <div class="msg-bubble">
                 <div class="msg-info">
                   <div class="msg-info-name">{this.botName}</div>
+                  <div class="msg-info-time">{this.formatDate(new Date())}</div>
                 </div>
-
                 <div class="msg-text">Oi, bem vindo ao {this.chatName}! Vá em frente e me envie uma mensagem. 😄</div>
               </div>
             </div>
