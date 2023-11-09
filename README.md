@@ -38,26 +38,22 @@ git clone https://github.com/frittas/PROJINT4SEM-EC
 cd PROJINT4SEM-EC
 ```
 
-### Instalar as dependências NPM
+### Instalar as dependências NPM na pasta chat-bubble e inicializar o webcomponent
 
 Instalar os packages `npm` contidos no arquivo `package.json` e verificar se tudo corre como esperado:
 
 ```shell
+cd chat-bubble
 npm install
 npm start
 ```
 
 
-## Ambiente de Desenvolvimento
+## Inicializar o servidor websocket python
 
-Executar `ng serve` para o ambiente de desenvolvimento. Navegar para `http://localhost:4200/`. A aplicação irá se atualizar automaticamente após quaisquer alterações.
-
-## Code scaffolding
-
-Executar `ng generate component component-name` para gerar um novo componente. Você também pode usar `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Executar `ng build` para construir o projeto. O resultado do build será armazenado no diretório `dist/`.
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Executar 
+```shell
+cd server
+python app.py
+``` 
+para iniciar o servidor websocket e consequentemente a instância do bot.
