@@ -1,4 +1,3 @@
-import chatterbot
 from chatterbot import ChatBot
 from chatterbot.comparisons import levenshtein_distance
 from chatterbot.trainers import ChatterBotCorpusTrainer
@@ -12,7 +11,14 @@ class Bot:
     ACCEPTANCE = 0.65
     botName = None
 
-    def __init__(self, name, train: bool, corpus: str, database_uri: str,  acceptance=None, ):
+    def __init__(
+        self,
+        name,
+        train: bool,
+        corpus: str,
+        database_uri: str,
+        acceptance=None,
+    ):
         self.botName = name
         self.database_uri = database_uri
 
@@ -27,30 +33,22 @@ class Bot:
         return ChatBot(
             name,
             read_only=readOnly,
-            storage_adapter='chatterbot.storage.MongoDatabaseAdapter',
+            storage_adapter="chatterbot.storage.MongoDatabaseAdapter",
+            response_selection_method=self.select_response,
+            statement_comparison_function=self.comparate_messages,
             logic_adapters=[
-                # {
-                #     "import_path": "customLogicAdapter.HighestConfidenceAdapter",
-                #     'threshold': self.ACCEPTANCE,
-
-                # },
                 {
                     "import_path": "chatterbot.logic.BestMatch",
-                    "statement_comparison_function": levenshtein_distance,
-                    "response_selection_method": chatterbot.response_selection.get_first_response,
                 }
             ],
-            preprocessors=[
-                'chatterbot.preprocessors.clean_whitespace'
-            ],
-            database_uri=f'{self.database_uri}/{database}'
+            preprocessors=["chatterbot.preprocessors.clean_whitespace"],
+            database_uri=f"{self.database_uri}/{database}",
         )
 
     def train(self, bot: ChatBot, corpusName: str):
         trainer = ChatterBotCorpusTrainer(bot)
         trainer.train(
-            "chatterbot.corpus.portuguese.greetings",
-            f"data/{corpusName}.yml"
+            "chatterbot.corpus.portuguese.greetings", f"data/{corpusName}.yml"
         )
 
     def select_response(self, message, list_response, storage=None):
@@ -69,17 +67,14 @@ class Bot:
         similarity = 0.0
 
         if message.text and candidate_message.text:
-            message_text = message.text
-            candidate_text = candidate_message.text
+            similarity = levenshtein_distance(message, candidate_message)
 
-            similarity = SequenceMatcher(None, message_text, candidate_text)
-            similarity = round(similarity.ratio(), 2)
             if similarity < self.ACCEPTANCE:
                 similarity = 0
             else:
                 print(
                     "Mensagem do usuário:",
-                    message_text,
+                    message.text,
                     ", mensagem candidata:",
                     candidate_message,
                     ", nível de confiança:",
@@ -88,13 +83,3 @@ class Bot:
 
         return similarity
 
-# while True:
-#     chat_input = input(
-#         "Digite alguma coisa...\n",
-#     )
-#     response = jarbas.get_response(chat_input)
-#     if response.confidence > 0.0:
-#         print(f"\n{jarbas.name}: {response}\n")
-#     else:
-#         print("Ainda não sei como responder essa pergunta :(")
-#         print("Pergunte outra coisa...")

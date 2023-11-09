@@ -1,9 +1,8 @@
-from bot import *
+from bot import Bot
 import asyncio
 from websockets.server import serve, WebSocketServerProtocol
 import json
 import urllib.parse
-
 
 async def onConnect(websocket, path: str):
 
@@ -13,7 +12,8 @@ async def onConnect(websocket, path: str):
     corpus = params["corpus"]
     botName = params["botName"]
     tolerance = float(params["tolerance"])
-    websocket.bot = Bot(botName, True, corpus, 'mongodb://localhost:27017', tolerance)
+    train=bool(params["train"])
+    websocket.bot = Bot(botName, train, corpus, 'mongodb://localhost:27017', tolerance)
     print((f'=========== Bot Inicializado: {botName} ================'))
     async for message in websocket:
         response = websocket.bot.getResponse(message)
