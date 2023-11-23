@@ -73,13 +73,11 @@ class Bot:
                 similarity = 0
             else:
                 print(
-                    "Mensagem do usuário:",
+                    "\nMensagem do usuário:",
                     message.text,
-                    ", mensagem candidata:",
+                    ", \nmensagem candidata:",
                     candidate_message,
-                    ", nível de confiança:",
+                    ", \nnível de confiança:",
                     similarity,
                 )
-
         return similarity
-
