@@ -8,7 +8,7 @@ Desenvolvimento de uma plataforma de chat utilizando Python, WebComponent, WebSo
 https://chatterbot.readthedocs.io/en/stable/
 
 
-## Checklist - Alterar
+## Checklist
 
 - [x] Instalar as bibliotecas necessárias: Chatterbot, WebComponent e WebSocket.
 - [x] Parametrização do ChatterBot.
@@ -20,10 +20,10 @@ https://chatterbot.readthedocs.io/en/stable/
 
 
 
-## Get started - Alterar
+## Get started
 
 
-### Pré Requisitos - Alterar
+### Pré Requisitos
 
 1. Instalar [ChatterBot](https://chatterbot.readthedocs.io/en/stable/setup.html)
 2. Instalar ChatterBot executando o comando no terminal:
